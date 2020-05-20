@@ -32,7 +32,7 @@ router.post('/register', validateUserInfo, (req, res) => {
         .catch(error => {
             res.status(500).json({ errorMessage: error.message })
         });
-});
+}); //working
 
 router.post('/login', validateUserInfo, (req, res) => {
     let { username, password } = req.body;
