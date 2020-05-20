@@ -1,4 +1,4 @@
-# SleepTracker v1.0.0
+# SleepTracker
 
 This is the backend documentation for Sleep Tracker Build Week Project
 
