@@ -7,12 +7,17 @@ const secrets = require('../api/secrets.js');
 
 
 
-router.get("/", (req, res) => {
-    res.status(200).json({ api: "working", dbenv: process.env.DB_ENV });
-});
+// endpoint begin with /auth
 
-router.post('/register', (req, res) => {
+router.post('/register', validateUserInfo, (req, res) => {
     let user = req.body;
+
+    const { password, username, lastname, firstname } = user
+
+    if(!user || !password || !username || !lastname || !firstname)  {
+        res.status(400).json({error: 'Every Field Must Be Entered'});
+        return
+      }
 
     const rounds = process.env.HASH_ROUNDS || 14;
 
@@ -29,7 +34,7 @@ router.post('/register', (req, res) => {
         });
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', validateUserInfo, (req, res) => {
     let { username, password } = req.body;
 
     Users.findBy({ username })
@@ -46,6 +51,7 @@ router.post('/login', (req, res) => {
         })
 })
 
+//Generate Token
 function generateToken(user) {
     const payload = {
         userId: user.id,
@@ -57,5 +63,15 @@ function generateToken(user) {
     };
     return jwt.sign(payload, secret, options);
 };
+
+//Custom Middleware
+
+function validateUserInfo(req, res, next) {
+    if (!req.body.username || !req.body.password) {
+      res.status(400).json({ message: 'Username & password fields are required.' });
+    } else {
+      next();
+    }
+  }
 
 module.exports = router;

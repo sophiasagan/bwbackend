@@ -17,7 +17,7 @@ server.use(cors({
 }))
 
 server.use("/auth", authRouter)
-server.use("/users", aunthenticate, usersRouter)
+server.use("/users", usersRouter)
 
 server.get("/", (req, res, next) => {
 	res.json({
