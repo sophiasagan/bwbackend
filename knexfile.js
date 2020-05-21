@@ -34,14 +34,14 @@ module.exports = {
       }
     },
 
-    production: {
-      client: 'sqlite3',
-      connection: { filename: './database/sleeptracker.db3' },
-      migrations: {
-        directory: './database/migrations',
-      },
-      seeds: { directory: './database/seeds' },
-      useNullAsDefault: true
-    }
+    // production: {
+    //   client: 'sqlite3',
+    //   connection: { filename: './database/sleeptracker.db3' },
+    //   migrations: {
+    //     directory: './database/migrations',
+    //   },
+    //   seeds: { directory: './database/seeds' },
+    //   useNullAsDefault: true
+    // }
   }
 };
