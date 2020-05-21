@@ -12,6 +12,16 @@ This is the backend documentation for Sleep Tracker Build Week Project
 	- [Get Users](#get-users)
 	- [Update User](#update-user)
 
+- [Sleep](#sleep)
+    -sleep start / sleep end
+    -
+    -sleep
+    /duration
+    /weekly
+    /monthly average
+    -mood before and after (0 - 3)
+    -score for sleep (1-4/)
+
 
 
 # Auth
