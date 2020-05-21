@@ -4,6 +4,7 @@ const cors = require("cors")
 
 const authRouter = require("./auth/auth-router")
 const usersRouter = require("./users/users-router")
+const sleepRouter = require("./sleep/sleep-router")
 
 const server = express()
 const port = process.env.PORT || 5000
@@ -18,6 +19,7 @@ server.use(cors({
 
 server.use("/auth", authRouter)
 server.use("/users", usersRouter)
+server.use("/sleep", sleepRouter)
 
 server.get("/", (req, res, next) => {
 	res.json({
