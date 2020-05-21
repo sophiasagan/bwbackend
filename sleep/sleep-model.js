@@ -1,8 +1,8 @@
 const db = require('../database/dbConfig.js');
 
 module.exports = {
-    get,
-    getAll,
+    // get,
+    // getAll,
     addSleepData,
     getSleepDataByUser,
     updateSleepData,
@@ -12,18 +12,18 @@ module.exports = {
     getSleepScore,
 };
 
-function get(id){
-    return db('sleep')
-    .select( 'sleep.id', 'u.firstName', 'sleep.date', 'sleep.timeCreated', 'sleep.moodAfterSleep', 'sleep.sleepScore', 'sleep.moodBeforeSleep', 'sleep.sleepStart', 'sleep.sleepEnd', 'sleep.duration')
-    .join('users as u', 'u.id', 'sleep.user_id')
-    .where({user_id: id})
-}
+// function get(id){
+//     return db('sleep')
+//     .select( 'sleep.id', 'u.firstName', 'sleep.date', 'sleep.timeCreated', 'sleep.moodAfterSleep', 'sleep.sleepScore', 'sleep.moodBeforeSleep', 'sleep.sleepStart', 'sleep.sleepEnd', 'sleep.duration')
+//     .join('users as u', 'u.id', 'sleep.user_id')
+//     .where({"sleep.user_id": id})
+// }
 
-function getAll(){
-    return db('sleep')
-    .select( 'sleep.id', 'u.firstName', 'sleep.date', 'sleep.timeCreated', 'sleep.moodAfterSleep', 'sleep.sleepScore', 'sleep.moodBeforeSleep', 'sleep.sleepStart', 'sleep.sleepEnd', 'sleep.duration')
-    .join('users as u', 'u.id', 'sleep.user_id');
-}
+// function getAll(){
+//     return db('sleep')
+//     .select( 'sleep.id','sleep.date', 'sleep.timeCreated', 'sleep.moodAfterSleep', 'sleep.sleepScore', 'sleep.moodBeforeSleep', 'sleep.sleepStart', 'sleep.sleepEnd', 'sleep.duration')
+//     .join('users as u', 'u.id', 'sleep.user_id')
+// }
 
 async function addSleepData(data) {
     const [id] = await db('sleep').insert(data, 'id');
@@ -52,9 +52,10 @@ function getDuration(duration) {
     return (new Date(sleepStart) - new Date(sleepEnd)) / 60 / 60 / 1000
 }
 
-function getSleepScore(sleepScore) {
+async function getSleepScore(id) {
     //console.log(sleepScore)
-
+    const [sleepScore] = await db('sleep')
+    .where({ "sleep.user_id": id, "sleep.duration": duration, "sleep.moodAfterSleep": moodAfterSleep})
     const { duration, moodAfterSleep } = sleepScore
     return (moodAfterSleep + duration) / 2
 }

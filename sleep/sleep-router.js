@@ -1,25 +1,54 @@
 const router = require('express').Router();
 
 const Users = require('../users/users-model.js');
-const SleepDb = require('./sleep-model.js');
+const db = require('./sleep-model.js');
 const restrict = require('../middleware/restrict');
 
+// router.get('/sleep', (req,res) => {
+//     db.find()
+//         .then(data => {
+//             res.status(200).json(data)
+//         })
+//         .catch(err => {
+//             console.log(err)
+//             res.status(500).json({message: 'unable to get all sleep data'})
+//         })
+// })
+
+// router.get('/', restrict, (req, res) => {
+
+
+
+//     db.getAll()
+//         .then(data => {
+//             res.json(data);
+//         })
+//         .catch(err => {
+//             console.log(err)
+//             res.status(500).json({
+//                 error: "Unable to get all sleep logs"
+//             })
+//         })
+
+// })
+
 router.post('/', restrict, (req, res) => {
-    SleepDb.addSleepData(req.body)
+    db.addSleepData(req.body)
         .then(data => {
             res.status(201).json(data);
         })
         .catch(err => {
             res.status(500).json(err);
-        });
-});
+        })
+});//working
 
+//retrieve user name with sleep log array
 router.get('/:id', restrict, (req, res) => {
     const id = req.params.id;
 
     Users.findById(id)
         .then(user => {
-            SleepDb.getSleepDataByUser(id)
+            db.getSleepDataByUser(id)
                 .then(data => {
                     res.status(200).json({ ...user, data });
                 })
@@ -36,7 +65,7 @@ router.put('/:id', restrict, (req, res) => {
     const id = req.params.id;
     const changes = req.body;
 
-    SleepDb.updateSleepData(id, changes)
+    db.updateSleepData(id, changes)
         .then(updatedData => {
             res.status(201).json(updatedData);
         })
@@ -48,7 +77,7 @@ router.put('/:id', restrict, (req, res) => {
 router.delete('/:id', restrict, (req, res) => {
     const id = req.params.id;
 
-    SleepDb.removeSleepData(id)
+    db.removeSleepData(id)
         .then(del => {
             res.status(200).json({ message: 'data deleted' });
         })
@@ -57,54 +86,69 @@ router.delete('/:id', restrict, (req, res) => {
         });
 });
 
-const post = (req, res) => {
-    // console.log(req.decodedToken.subject)
-    const user_id = req.decodedToken.subject
-    const sleepEntry = req.body
-    const duration = SleepDb.getDuration(sleepEntry)
-    const score = SleepDb.getScore(sleepEntry)
-    SleepDb.add({
-        ...sleepEntry,
-        duration,
-        user_id,
-        score
-    })
-        .then(results => {
-            return res.status(201).json(results);
+//retrieves sleep log array only - no user information
+router.get('/:id/logs', restrict, (req, res) => {
+    const id = req.params.id
+
+    db.getSleepDataByUser(id)
+        .then(data => {
+            res.json(data);
         })
-        .catch(err => res.send(err));
-}
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({
+                error: "Unable to get sleep logs"
+            })
+        })
+});
 
-const put = async (req, res) => {
+router.get('/:id/logs/score', restrict, (req, res) => {
+    // console.log(req.decodedToken.subject)
+    const id = req.params.id
+    
+    db.getSleepScore(id)
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({
+                error: "Unable to get sleep score"
+            })
+        })
+})
 
-    // console.log(req.body)
-    const sleep_id = req.params.id
-    const user_id = req.decodedToken.subject
-    const result = await SleepDb.findBy({ user_id, id: sleep_id }).first()
 
-    if (!result) {
-        return res.status(404).json("Unauthorized Item");
-    }
+// const put = async (req, res) => {
 
-    const pendingItem = { ...result, ...req.body }
-    // console.log(pendingItem)
-    const duration = SleepDb.getDuration(pendingItem)
-    const score = SleepDb.getScore(pendingItem)
+//     // console.log(req.body)
+//     const sleep_id = req.params.id
+//     const user_id = req.decodedToken.subject
+//     const result = await db.findBy({ user_id, id: sleep_id }).first()
 
-    const newItem = {
-        ...pendingItem,
-        user_id,
-        duration,
-        score,
-    }
+//     if (!result) {
+//         return res.status(404).json("Unauthorized Item");
+//     }
 
-    const updatedItem = await SleepDb.update(result.id, newItem)
-    if (updatedItem) {
-        res.status(200).json(updatedItem)
-    } else {
-        res.status(500).json('Update Failed')
-    }
-}
+//     const pendingItem = { ...result, ...req.body }
+//     // console.log(pendingItem)
+//     const duration = db.getDuration(pendingItem)
+//     const score = db.getScore(pendingItem)
+
+//     const newItem = {
+//         ...pendingItem,
+//         user_id,
+//         duration,
+//         score,
+//     }
+
+//     const updatedItem = await db.update(result.id, newItem)
+//     if (updatedItem) {
+//         res.status(200).json(updatedItem)
+//     } else {
+//         res.status(500).json('Update Failed')
+//     }
+// }
 
 
 
@@ -112,11 +156,11 @@ const put = async (req, res) => {
 // const remove = (req, res) => {
 //     // console.log(req.decodedToken.subject)
 //     const user_id = req.decodedToken.subject
-//     SleepDb.findBy({ user_id, id: req.params.id })
+//     db.findBy({ user_id, id: req.params.id })
 //         .then(results => {
 //             // console.log(results)
 //             if (results[0]) {
-//                 SleepDb.remove(req.params.id)
+//                 db.remove(req.params.id)
 //                     .then(success => success == 1 ? res.status(200).json(success) : res.status(404).json({ err: 'please try again' }))
 //                     .catch(err => res.status(500).json(err))
 //             }
