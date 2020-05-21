@@ -36,12 +36,21 @@ module.exports = {
 
     production: {
       client: 'sqlite3',
-      connection: { filename: './database/sleeptracker.db3' },
-      migrations: {
-        directory: './database/migrations',
+      useNullAsDefault: true,
+      connection: {
+        filename: "./database/sleeptracker.db3",
       },
-      seeds: { directory: './database/seeds' },
-      useNullAsDefault: true
+      migrations: {
+        directory: "./database/migrations",
+      },
+      seeds: {
+        directory: "./database/seeds",
+      },
+      pool: {
+        afterCreate: (conn, done) => {
+          conn.run("PRAGMA foreign_keys = ON", done)
+        },
+      }
     }
   }
 };
