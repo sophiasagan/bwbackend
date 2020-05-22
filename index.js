@@ -1,4 +1,5 @@
 const express = require("express")
+const bodyParser = require('body-parser')
 const helmet = require("helmet")
 const cors = require("cors")
 
@@ -12,10 +13,19 @@ const port = process.env.PORT || 5000
 server.use(helmet())
 server.use(express.json())
 
-server.use(cors({
-	credentials: true,
-	origin: "http://localhost:5000",
-}))
+// parse serverlication/x-www-form-urlencoded
+server.use(bodyParser.urlencoded({ extended: false }))
+
+// parse serverlication/json
+server.use(bodyParser.json())
+
+// server.use(function (req, res) {
+//   res.setHeader('Content-Type', 'text/plain')
+//   res.write('you posted:\n')
+//   res.end(JSON.stringify(req.body, null, 2))
+// })
+
+server.use(cors())
 
 server.use("/auth", authRouter)
 server.use("/users", usersRouter)

@@ -4,34 +4,6 @@ const Users = require('../users/users-model.js');
 const db = require('./sleep-model.js');
 const restrict = require('../middleware/restrict');
 
-// router.get('/sleep', (req,res) => {
-//     db.find()
-//         .then(data => {
-//             res.status(200).json(data)
-//         })
-//         .catch(err => {
-//             console.log(err)
-//             res.status(500).json({message: 'unable to get all sleep data'})
-//         })
-// })
-
-// router.get('/', restrict, (req, res) => {
-
-
-
-//     db.getAll()
-//         .then(data => {
-//             res.json(data);
-//         })
-//         .catch(err => {
-//             console.log(err)
-//             res.status(500).json({
-//                 error: "Unable to get all sleep logs"
-//             })
-//         })
-
-// })
-
 router.post('/', restrict, (req, res) => {
     db.addSleepData(req.body)
         .then(data => {
@@ -67,12 +39,12 @@ router.put('/:id', restrict, (req, res) => {
 
     db.updateSleepData(id, changes)
         .then(updatedData => {
-            res.status(201).json(updatedData);
+            res.status(202).json(updatedData);
         })
         .catch(err => {
             res.status(500).json(err);
         });
-});
+});//working
 
 router.delete('/:id', restrict, (req, res) => {
     const id = req.params.id;
@@ -84,7 +56,7 @@ router.delete('/:id', restrict, (req, res) => {
         .catch(err => {
             res.status(500).json(err);
         });
-});
+});//working
 
 //retrieves sleep log array only - no user information
 router.get('/:id/logs', restrict, (req, res) => {
@@ -101,75 +73,7 @@ router.get('/:id/logs', restrict, (req, res) => {
             })
         })
 });
-
-router.get('/:id/logs/score', restrict, (req, res) => {
-    // console.log(req.decodedToken.subject)
-    const id = req.params.id
-    
-    db.getSleepScore(id)
-        .then(data => {
-            res.json(data);
-        })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json({
-                error: "Unable to get sleep score"
-            })
-        })
-})
-
-
-// const put = async (req, res) => {
-
-//     // console.log(req.body)
-//     const sleep_id = req.params.id
-//     const user_id = req.decodedToken.subject
-//     const result = await db.findBy({ user_id, id: sleep_id }).first()
-
-//     if (!result) {
-//         return res.status(404).json("Unauthorized Item");
-//     }
-
-//     const pendingItem = { ...result, ...req.body }
-//     // console.log(pendingItem)
-//     const duration = db.getDuration(pendingItem)
-//     const score = db.getScore(pendingItem)
-
-//     const newItem = {
-//         ...pendingItem,
-//         user_id,
-//         duration,
-//         score,
-//     }
-
-//     const updatedItem = await db.update(result.id, newItem)
-//     if (updatedItem) {
-//         res.status(200).json(updatedItem)
-//     } else {
-//         res.status(500).json('Update Failed')
-//     }
-// }
-
-
-
-
-// const remove = (req, res) => {
-//     // console.log(req.decodedToken.subject)
-//     const user_id = req.decodedToken.subject
-//     db.findBy({ user_id, id: req.params.id })
-//         .then(results => {
-//             // console.log(results)
-//             if (results[0]) {
-//                 db.remove(req.params.id)
-//                     .then(success => success == 1 ? res.status(200).json(success) : res.status(404).json({ err: 'please try again' }))
-//                     .catch(err => res.status(500).json(err))
-//             }
-//             else {
-//                 return res.status(404).json("Unauthorized Item");
-//             }
-//         })
-//         .catch(err => res.send(err));
-// }
+//working
 
 
 module.exports = router;
