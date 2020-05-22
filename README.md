@@ -97,7 +97,7 @@ Response
 
 # Users
 
-Existing user endpoints
+<p>Existing user endpoints</p>
 
 ``` 
 | Table     | Method | Endpoint                          | Description                                                                                                       
@@ -124,7 +124,7 @@ Existing user endpoints
 
 ## Get User
 
-GET /users
+  GET /users
 
 ### Success Response
 
@@ -157,7 +157,7 @@ Response
 
 ## Get Users
 
-GET /users/:id
+  GET /users/:id
 
 ### Success Response
 
@@ -180,7 +180,7 @@ Response
 
 ## Delete User
 
-DEL /users/:id
+  DEL /users/:id
 
 ### Success Response
 
@@ -202,11 +202,11 @@ Response
 
 ## Update User
 
-PUT /users/:id (endpoint not available -- work in progress)
+  PUT /users/:id (endpoint not available -- work in progress)
 
 # Sleep
 
-Existing user `sleep` endpoints
+<p>Existing user `sleep` endpoints</p>
 
 ``` 
 | Table     | Method | Endpoint                          | Description                                                                                                       
@@ -234,7 +234,7 @@ Existing user `sleep` endpoints
 
 ## Get Sleep Log
 
-GET /sleep/:id
+  GET /sleep/:id
 
 ### Success Response
 
@@ -292,7 +292,7 @@ Response
 
 ## Get Sleep Log by Id
 
-GET /sleep/:id/logs
+  GET /sleep/:id/logs
 
 ### Success Response
 
@@ -346,7 +346,7 @@ Response
 
 ## Delete Sleep Log
 
-DEL /sleep/:id
+  DEL /sleep/:id
 
 ### Success Response
 
@@ -368,7 +368,7 @@ Response
 
 ## Update Sleep Log
 
-PUT /sleep/:id 
+  PUT /sleep/:id 
 
 ### Success Response
 
@@ -389,7 +389,7 @@ Response
 
 ## Create Sleep Log
 
-POST /sleep
+  POST /sleep
 
 ### Success Response
 
