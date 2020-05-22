@@ -15,8 +15,12 @@ This is the backend documentation for Sleep Tracker Build Week Project
   + [Update User](#update-user)
 
 * [Sleep](#sleep)
-  + [Sleep Start](#sleep-start)
-  + [Sleep End](#sleep-end)
+  + [Get Sleep Log](#get-sleep-log)
+  + [Get Sleep Log by ID](#get-sleep-log-by-id)
+  + [Delete Sleep Log](#delete-sleep-log)
+  + [Create Sleep Log](#create-sleep-log)
+  + [Update Sleep Log](#update-sleep-log)
+ 
 
 # Deployment <a name="deployment"></a>
 
@@ -200,7 +204,209 @@ Response
 
 PUT /users/:id (endpoint not available -- work in progress)
 
+# Sleep
 
+Existing user `sleep` endpoints
+
+``` 
+| Table     | Method | Endpoint                          | Description                                                                                                       
+------------------------------------------------------------------------------------------------------------------
+| sleep     | PUT    | /sleep/:id                        | Updates `sleep` log using the information
+|           |        |                                   | sent inside the `body` of the request and returns a
+|           |        |                                   | message along. |
+|           |        |                                   |    
+------------------------------------------------------------------------------------------------------------------
+| sleep     | DEL    | /sleep/:id                        | Deletes a single `sleep` log. |
+|           |        |                                   | 
+------------------------------------------------------------------------------------------------------------------
+| sleep     | POST   | /sleep                            | Creates `sleep` log using the information sent inside
+|           |        |                                   | the `body` of the request.|
+------------------------------------------------------------------------------------------------------------------
+| sleep     | GET    | /sleep/:id                        | Retrieves an array of user's `sleep` logs and returns a
+|           |        |                                   | message with the array in the `body` of the response. |
+------------------------------------------------------------------------------------------------------------------
+| sleep     | GET    | /sleep/:id/logs                   | Retrieves an array of user's `sleep` logs returns a
+|           |        |                                   | message with the object inside the `body` of the 
+|           |        |                                   | response without any of the user's profile information. |   
+-----------------------------------------------------------------------------------------------------------------                                                         
+
+```
+
+## Get Sleep Log
+
+GET /sleep/:id
+
+### Success Response
+
+Response
+
+``` 
+{
+  "id": 1,
+  "username": "joedoe",
+  "data": [
+    {
+      "id": 1,
+      "date": "2020-04-21",
+      "sleepStart": "2020-04-21 21:15:00.000",
+      "sleepEnd": "2020-04-22 07:15:00.000",
+      "duration": 10,
+      "moodBeforeSleep": 1,
+      "moodAfterSleep": 3,
+      "sleepScore": 7,
+      "user_id": 1
+    },
+    {
+      "id": 2,
+      "date": "2020-04-22",
+      "sleepStart": "2020-04-22 021:15:00.000",
+      "sleepEnd": "2020-04-23 07:15:00",
+      "duration": 10,
+      "moodBeforeSleep": 4,
+      "moodAfterSleep": 4,
+      "sleepScore": 5.5,
+      "user_id": 1
+    },
+    {
+      "id": 3,
+      "date": "2020-04-21",
+      "sleepStart": "2020-04-21 21:15:00.000",
+      "sleepEnd": "2020-04-22 07:15:00.000",
+      "duration": 10,
+      "moodBeforeSleep": 2,
+      "moodAfterSleep": 2,
+      "sleepScore": null,
+      "user_id": 1
+    }
+  ]
+}
+```
+
+### Error Response
+
+``` 
+{
+  "message": "invalid credentials"
+}
+```
+
+## Get Sleep Log by Id
+
+GET /sleep/:id/logs
+
+### Success Response
+
+Response
+
+``` 
+[
+  {
+    "id": 1,
+    "date": "2020-04-21",
+    "sleepStart": "2020-04-21 21:15:00.000",
+    "sleepEnd": "2020-04-22 07:15:00.000",
+    "duration": 10,
+    "moodBeforeSleep": 1,
+    "moodAfterSleep": 3,
+    "sleepScore": 7,
+    "user_id": 1
+  },
+  {
+    "id": 2,
+    "date": "2020-04-22",
+    "sleepStart": "2020-04-22 021:15:00.000",
+    "sleepEnd": "2020-04-23 07:15:00",
+    "duration": 10,
+    "moodBeforeSleep": 4,
+    "moodAfterSleep": 4,
+    "sleepScore": 5.5,
+    "user_id": 1
+  },
+  {
+    "id": 3,
+    "date": "2020-04-21",
+    "sleepStart": "2020-04-21 21:15:00.000",
+    "sleepEnd": "2020-04-22 07:15:00.000",
+    "duration": 10,
+    "moodBeforeSleep": 2,
+    "moodAfterSleep": 2,
+    "sleepScore": null,
+    "user_id": 1
+  }
+]
+```
+
+### Error Response
+
+``` 
+{
+  "message": "invalid credentials"
+}
+```
+
+## Delete Sleep Log
+
+DEL /sleep/:id
+
+### Success Response
+
+Response
+
+``` 
+{
+  "message": "data deleted"
+}
+```
+
+### Error Response
+
+``` 
+{
+  "message": "invalid credentials"
+}
+```
+
+## Update Sleep Log
+
+PUT /sleep/:id 
+
+### Success Response
+
+Response
+
+``` 
+1
+
+```
+
+### Error Response
+
+``` 
+{
+  "message": "invalid credentials"
+}
+```
+
+## Create Sleep Log
+
+POST /sleep
+
+### Success Response
+
+Response
+
+``` 
+[]
+
+```
+
+### Error Response
+
+``` 
+{
+  "message": "invalid credentials"
+}
+```
 
 ## Built With
 
