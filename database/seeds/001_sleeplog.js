@@ -12,14 +12,13 @@ exports.seed = function (knex) {
           sleepEnd: "2020-04-22 07:15:00.000",
           duration: (new Date("2020-04-22 07:15:00.000").getTime() - new Date("2020-04-21 21:15:00.000").getTime()) / 60 / 60 / 1000,
           moodBeforeSleep: 1,
-
           moodAfterSleep: 3,
           sleepScore: 7
         },
 
         {
           user_Id: 1,
-          date: "04/22/2020",
+          date: "2020-04-22",
           sleepStart: "2020-04-22 021:15:00.000",
           sleepEnd: "2020-04-23 07:15:00",
           duration: (new Date("2020-04-23 07:15:00.000").getTime() - new Date("2020-04-22 021:15:00.000").getTime()) / 60 / 60 / 1000,
@@ -32,7 +31,7 @@ exports.seed = function (knex) {
 
         {
           user_Id: 1,
-          date: "April 21, 2020",
+          date: "2020-04-21",
           sleepStart: "2020-04-21 21:15:00.000",
           sleepEnd: "2020-04-22 07:15:00.000",
           duration: (new Date("2020-04-22 07:15:00.000").getTime() - new Date("2020-04-21 21:15:00.000").getTime()) / 60 / 60 / 1000,
@@ -43,7 +42,7 @@ exports.seed = function (knex) {
 
         {
           user_Id: 2,
-          date: "04/21/2020",
+          date: "2020-04-21",
           sleepStart: "2020-04-21 21:15:00.000",
           sleepEnd: "2020-04-22 07:15:00.000",
           duration: (new Date("2020-04-22 07:15:00.000").getTime() - new Date("2020-04-21 21:15:00.000").getTime()) / 60 / 60 / 1000,
@@ -56,7 +55,7 @@ exports.seed = function (knex) {
 
         {
           user_Id: 3,
-          date: "April 21, 2020",
+          date: "2020-04-21",
           sleepStart: "2020-04-21 21:15:00.000",
           sleepEnd: "2020-04-22 07:15:00.000",
           duration: (new Date("2020-04-22 07:15:00.000").getTime() - new Date("2020-04-21 21:15:00.000").getTime()) / 60 / 60 / 1000,
