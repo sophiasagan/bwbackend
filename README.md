@@ -18,27 +18,6 @@ This is the backend documentation for Sleep Tracker Build Week Project
   + [Sleep Start](#sleep-start)
   + [Sleep End](#sleep-end)
 
-* [Duration](#duration)
-  + [Get Duration](#get-duration)
-  + [Update Duration](#update-duration)
-
-* [Mood](#mood)
-  + [Delete User](#delete-user)
-  + [Get User](#get-user)
-
-* [Score](#score)
-  + [Get Users](#get-users)
-  + [Update User](#update-user)
-    - [Sleep Start] (#sleep-start)
-    - [Sleep End] (#sleep-end)
-    - sleep
-
-    /duration
-    /weekly
-    /monthly average
-    -mood before and after (0 - 3)
-    -score for sleep (1-4/)
-
 # Deployment <a name="deployment"></a>
 
 * [Backend Deployment](https://sleeptracker4.herokuapp.com/)
@@ -112,6 +91,114 @@ Response
 }
 ```
 
+# Users
+
+Existing user endpoints
+
+``` 
+| Table     | Method | Endpoint                          | Description                                                                                                       
+------------------------------------------------------------------------------------------------------------------
+| users     | PUT    | /users/:id                        | Updates `user` profile using the information
+|           |        |               (WIP)               | sent inside the `body` of the request and returns a
+|           |        |                                   | message along. |
+|           |        |                                   |    
+------------------------------------------------------------------------------------------------------------------
+| users     | DEL    | /users/:id                        | Deletes a single `user` object. |
+|           |        |                                   | 
+|           |        |                                   | 
+|           |        |                                   |  
+------------------------------------------------------------------------------------------------------------------
+| users     | GET    | /users                            | Retrieves an array of `user` objects and returns a
+|           |        |                                   | message with the array in the `body` of the response. |
+------------------------------------------------------------------------------------------------------------------
+| users     | GET    | /users/:id                        | Retrieves a single `user` object and returns a
+|           |        |                                   | message with the object inside the `body` of the 
+|           |        |                                   | response. |   
+-----------------------------------------------------------------------------------------------------------------                                                         
+
+```
+
+## Get User
+
+GET /users
+
+### Success Response
+
+Response
+
+``` 
+[
+  {
+    "id": 2,
+    "username": "jandoe"
+  },
+  {
+    "id": 1,
+    "username": "joedoe"
+  },
+  {
+    "id": 4,
+    "username": "jondoe"
+  }
+]
+```
+
+### Error Response
+
+``` 
+{
+  "message": "Invalid username or password"
+}
+```
+
+## Get Users
+
+GET /users/:id
+
+### Success Response
+
+Response
+
+``` 
+{
+  "id": 1,
+  "username": "joedoe"
+}
+```
+
+### Error Response
+
+``` 
+{
+  "message": "User Not Found."
+}
+```
+
+## Delete User
+
+DEL /users/:id
+
+### Success Response
+
+Response
+
+``` 
+{
+  "message": "1 record deleted."
+}
+```
+
+### Error Response
+
+``` 
+{
+  "message": "User Not Found."
+}
+```
+
+## Update User
+
+PUT /users/:id (endpoint not available -- work in progress)
 
 
 
@@ -119,15 +206,15 @@ Response
 
 ---
 
-- [Node.js](https://en.wikipedia.org/wiki/Node.js) - JavaScript runtime for executing JavaScript at the server outside the browser
-- [Express.js](https://expressjs.com/) - Lightweight web framework to bootstrap Node.js APIs
-- [SQLite3](https://www.sqlite.org/index.html) - Super lightweight database to bootstrap development environments
-- [PostgreSQL](https://www.postgresql.org/) - An advanced object-relational database for production environments
-- [Knex.js](https://knexjs.org/) - A SQL query builder that helps abstracting migrations and DDLs for different database types into a single coherent structure
-- [Bcrypt.js](https://www.npmjs.com/package/bcryptjs) - A module to help make passwords more secure
-- [CORS](https://www.npmjs.com/package/cors) - A Node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options
-- [Helmet](https://www.npmjs.com/package/helmet) - A collection of 14 smaller middleware functions that set HTTP response headers
-- [JWT](https://jwt.io/) - JSON Web Token for authorization and client side tokens for security
-- [Supertest](https://www.npmjs.com/package/supertest) - A test module for HTTP assertions
-- [Jest](https://jestjs.io/) - A simple JavaScript testing framework
-- [Dotenv](https://www.npmjs.com/package/dotenv) - a zero-dependency module that loads environment variables from a .env file into process.env
+* [Node.js](https://en.wikipedia.org/wiki/Node.js) - JavaScript runtime for executing JavaScript at the server outside the browser
+* [Express.js](https://expressjs.com/) - Lightweight web framework to bootstrap Node.js APIs
+* [SQLite3](https://www.sqlite.org/index.html) - Super lightweight database to bootstrap development environments
+* [PostgreSQL](https://www.postgresql.org/) - An advanced object-relational database for production environments
+* [Knex.js](https://knexjs.org/) - A SQL query builder that helps abstracting migrations and DDLs for different database types into a single coherent structure
+* [Bcrypt.js](https://www.npmjs.com/package/bcryptjs) - A module to help make passwords more secure
+* [CORS](https://www.npmjs.com/package/cors) - A Node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options
+* [Helmet](https://www.npmjs.com/package/helmet) - A collection of 14 smaller middleware functions that set HTTP response headers
+* [JWT](https://jwt.io/) - JSON Web Token for authorization and client side tokens for security
+* [Supertest](https://www.npmjs.com/package/supertest) - A test module for HTTP assertions
+* [Jest](https://jestjs.io/) - A simple JavaScript testing framework
+* [Dotenv](https://www.npmjs.com/package/dotenv) - a zero-dependency module that loads environment variables from a .env file into process.env

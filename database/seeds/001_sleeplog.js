@@ -54,7 +54,7 @@ exports.seed = function (knex) {
 
 
         {
-          user_Id: 3,
+          user_Id: 4,
           date: "2020-04-21",
           sleepStart: "2020-04-21 21:15:00.000",
           sleepEnd: "2020-04-22 07:15:00.000",
