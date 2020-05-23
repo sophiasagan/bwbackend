@@ -26,16 +26,17 @@ router.get('/:id', verifyUser, (req, res) => {
 
 // router.put('/:id', verifyUser, (req, res) => {
 //     const id = req.params.id;
-    // const changes = req.body;
+//     const changes = req.body;
 
-  //   Users.update(id, changes)
-  //     .then(updatedUser => {
-  //       res.status(201).json(updatedUser);
-  //     })
-  //     .catch(err => {
-  //       res.status(500).json(err);
-  //     });
-  // });
+//     Users.update(id, changes)
+//       .then(updatedUser => {
+//         res.status(201).json(updatedUser);
+//       })
+//       .catch(err => {
+//         res.status(500).json(err);
+//       });
+//   });
+
   // let changes = req.body;
 
   // const { password, username, lastname, firstname } = changes

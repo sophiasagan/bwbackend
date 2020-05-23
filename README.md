@@ -12,7 +12,7 @@ This is the backend documentation for Sleep Tracker Build Week Project
   + [Delete User](#delete-user)
   + [Get User](#get-user)
   + [Get Users](#get-users)
-  + [Update User](#update-user)
+  <!-- + [Update User](#update-user)  work in progress -->
 
 * [Sleep](#sleep)
   + [Get Sleep Log](#get-sleep-log)
@@ -20,6 +20,7 @@ This is the backend documentation for Sleep Tracker Build Week Project
   + [Delete Sleep Log](#delete-sleep-log)
   + [Create Sleep Log](#create-sleep-log)
   + [Update Sleep Log](#update-sleep-log)
+  + [Get Sleep Duration](#get-sleep-duration)
  
 
 # Deployment <a name="deployment"></a>
@@ -228,7 +229,11 @@ Response
 | sleep     | GET    | /sleep/:id/logs                   | Retrieves an array of user's `sleep` logs returns a
 |           |        |                                   | message with the object inside the `body` of the 
 |           |        |                                   | response without any of the user's profile information. |   
------------------------------------------------------------------------------------------------------------------                                                         
+-----------------------------------------------------------------------------------------------------------------   
+| sleep     | GET    | /sleep/:id/logs/duration          | Retrieves an array of user's `sleep` duration returns a
+|           |        |                                   | message with the object inside the `body` of the 
+|           |        |                                   | response. |   
+-----------------------------------------------------------------------------------------------------------------                                                            
 
 ```
 
@@ -341,6 +346,51 @@ Response
 ``` 
 {
   "message": "invalid credentials"
+}
+```
+## Get Sleep Duration
+
+  GET /sleep/:id/logs/duration
+
+### Success Response
+
+Response
+
+``` 
+[
+  {
+    "id": 1,
+    "date": "2020-04-21",
+    "duration": 10
+  },
+  {
+    "id": 2,
+    "date": "2020-04-22",
+    "duration": 10
+  },
+  {
+    "id": 3,
+    "date": "2020-04-21",
+    "duration": 10
+  },
+  {
+    "id": 6,
+    "date": "April 22, 2020",
+    "duration": 10
+  },
+  {
+    "id": 7,
+    "date": "April 22, 2020",
+    "duration": 10
+  }
+]
+```
+
+### Error Response
+
+``` 
+{
+  "message": "Unable to get duration information"
 }
 ```
 

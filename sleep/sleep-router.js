@@ -75,6 +75,8 @@ router.get('/:id/logs', restrict, (req, res) => {
 });
 //working
 
+
+//retrieves duration with date and sleep id
 router.get('/:id/logs/duration', restrict, (req, res) => {
     const id = req.params.id
     const duration = req.params.duration
@@ -87,9 +89,9 @@ router.get('/:id/logs/duration', restrict, (req, res) => {
     .catch(err => {
         console.log(err)
         res.status(500).json({
-            error: "Unable to get sleep logs"
+            error: "Unable to get duration information"
         })
     })
-})
+})//working
 
 module.exports = router;
