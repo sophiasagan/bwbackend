@@ -5,7 +5,7 @@ module.exports = {
     getSleepDataByUser,
     updateSleepData,
     removeSleepData,
-    // getDuration,
+    getDuration,
     // getAvgSleepData,
     // getSleepScore,
 };
@@ -33,10 +33,11 @@ function removeSleepData(id) {
         .delete();
 }
 
-// function getDuration(duration) {
-//     const { sleepStart, sleepEnd } = duration
-//     return (new Date(sleepStart) - new Date(sleepEnd)) / 60 / 60 / 1000
-// }
+function getDuration(id) {
+    return db('sleep')
+    .select('id', 'date', 'duration')
+    .where('sleep.user_id', '=', id);
+}
 
 // async function getSleepScore(id) {
 //     //console.log(sleepScore)
