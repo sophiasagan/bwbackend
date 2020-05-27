@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const Users = require('./auth-model.js');
 const secrets = require('../api/secrets.js');
 
+require('dotenv').config();
+
 
 
 // endpoint begin with /auth

@@ -1,7 +1,7 @@
 const supertest = require("supertest")
 // our server won't actually start when it's required in,
 // due to the if statement in index.js
-const server = require("../index")
+const server = require("../server")
 
 test("GET /", async () => {
 	// we start by ARRANGing the test data we need
@@ -16,3 +16,4 @@ test("GET /", async () => {
 	expect(res.type).toBe("application/json") // res.type is shorthand for res.headers["content-type"]
 	expect(res.body.message).toBe("Welcome to our API")
 })
+

@@ -1,5 +1,7 @@
 // Update with your config settings.
 
+
+
 module.exports = {
 
   development: {
@@ -10,6 +12,7 @@ module.exports = {
     },
     migrations: {
       directory: "./database/migrations",
+      tableName: 'dbmigrations',
     },
     seeds: {
       directory: "./database/seeds",
@@ -30,22 +33,21 @@ module.exports = {
         directory: './database/seeds',
       },
     },
-    
-  
+
+
     testing: {
       client: 'sqlite3',
-      connection: {
-        filename: './database/sleeptracker-test.db3'
-      },
       useNullAsDefault: true,
+      connection: {
+        filename: "./database/sleeptracker-test.db3",
+      },
       migrations: {
-        directory: './database/migrations',
+        directory: "./database/migrations",
       },
       seeds: {
-        directory: './database/seeds'
-      }
+        directory: "./database/seeds",
+      },
     },
-
   }
-    
+
 };
